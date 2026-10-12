@@ -1,0 +1,14 @@
+node_modules/
+dist/
+build/
+.env
+.env.local
+/data/local_db.json
+/apps/api/data/local_db.json
+.DS_Store
+*.log
+coverage/
+.vite/
+uploads/
+*.pdf
+!sample_resumes/*.pdf

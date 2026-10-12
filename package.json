@@ -1,0 +1,10 @@
+{
+  "name": "talentrivox-ai-workspace-launcher",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm --prefix ./TalentrivoX-AI-main install",
+    "dev": "npm --prefix ./TalentrivoX-AI-main run dev",
+    "dev:api": "npm --prefix ./TalentrivoX-AI-main run dev:api",
+    "dev:web": "npm --prefix ./TalentrivoX-AI-main run dev:web"
+  }
+}
