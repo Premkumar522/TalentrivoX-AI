@@ -16,6 +16,18 @@ describe('API Integration Test Suite (AvengerCoders Recruitment Engine)', () => 
     expect(res.body.aiProvider).toBeDefined();
   });
 
+  it('POST /api/v1/auth/register rejects invalid email without crashing the API', async () => {
+    const res = await request(app)
+      .post('/api/v1/auth/register')
+      .send({ fullName: 'Recruiter QA', email: 'invalid-email', password: 'seeker123', role: 'recruiter' });
+
+    expect(res.status).toBe(400);
+    expect(res.body.error.code).toBe('VALIDATION_ERROR');
+
+    const health = await request(app).get('/api/v1/health');
+    expect(health.status).toBe(200);
+  });
+
   it('POST /api/v1/auth/demo logs in and provides valid JWT', async () => {
     const res = await request(app).post('/api/v1/auth/demo');
     expect(res.status).toBe(200);

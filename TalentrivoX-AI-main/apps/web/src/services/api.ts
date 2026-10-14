@@ -30,11 +30,14 @@ async function request<T = any>(endpoint: string, options: RequestInit = {}): Pr
   });
 
   if (!res.ok) {
+    const responseText = await res.text();
     let errorData: any = {};
-    try {
-      errorData = await res.json();
-    } catch {
-      errorData = { message: await res.text() };
+    if (responseText) {
+      try {
+        errorData = JSON.parse(responseText);
+      } catch {
+        errorData = { message: responseText };
+      }
     }
     throw new ApiError(
       errorData.error?.message || errorData.message || `Request failed with status ${res.status}`,
